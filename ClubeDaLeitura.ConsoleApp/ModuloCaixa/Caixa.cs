@@ -17,4 +17,11 @@ public class Caixa
         Cor = cor;
         DiasDeEmprestimo = diasDeEmprestimo;
     }
+
+    public void Atualizar(Caixa caixaAtualizada)
+    {
+        Etiqueta = caixaAtualizada.Etiqueta;
+        Cor = caixaAtualizada.Cor;
+        DiasDeEmprestimo = caixaAtualizada.DiasDeEmprestimo;
+    }
 }

@@ -45,14 +45,41 @@ public class TelaCaixa
         Console.ReadLine();
     }
 
-    public void VisualizarTodos()
+    public void Editar()
     {
         Console.WriteLine("---------------------------");
-        Console.WriteLine("Visualização de Caixas");
+        Console.WriteLine("Edição de Caixa");
         Console.WriteLine("---------------------------");
 
+        VisualizarTodos(false);
+
+        Console.WriteLine("---------------------------");
+        Console.Write("Digite o ID do registro que deseja editar: ");
+        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+        Caixa caixaAtualizada = ObterDadosCadastrais();
+
+        repositorioCaixa.Editar(idSelecionado, caixaAtualizada);
+
+        Console.WriteLine("---------------------------");
+        Console.WriteLine($"O registro \"{caixaAtualizada.Etiqueta}\" foi editado com sucesso!");
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Pressione ENTER para prosseguir.");
+        Console.ReadLine();
+
+    }
+
+    public void VisualizarTodos(bool deveExibirCabecalho)
+    {
+        if (deveExibirCabecalho)
+        {
+            Console.WriteLine("---------------------------");
+            Console.WriteLine("Visualização de Caixas");
+            Console.WriteLine("---------------------------");
+        }
+
         Console.WriteLine(
-            "{0, -7} | {1, -15} | {2, -30} | {3, -17}",
+            "{0, -7} | {1, -20} | {2, -10} | {3, -20}",
             "Id", "Etiqueta", "Cor", "Tempo de Empréstimo"
         );
 
@@ -66,14 +93,19 @@ public class TelaCaixa
                 continue;
 
             Console.WriteLine(
-            "{0, -7} | {1, -15} | {2, -30} | {3, -17}",
+            "{0, -7} | {1, -20} | {2, -10} | {3, -20}",
             c.Id, c.Etiqueta, c.Cor, c.DiasDeEmprestimo
         );
         }
 
-        Console.WriteLine("---------------------------");
-        Console.WriteLine("Pressione ENTER para prosseguir.");
-        Console.ReadLine();
+        if (deveExibirCabecalho)
+        {
+
+            Console.WriteLine("---------------------------");
+            Console.WriteLine("Pressione ENTER para prosseguir.");
+            Console.ReadLine();
+        }
+
     }
 
     private Caixa ObterDadosCadastrais()
@@ -92,4 +124,6 @@ public class TelaCaixa
         return novaCaixa;
 
     }
+
+
 }
