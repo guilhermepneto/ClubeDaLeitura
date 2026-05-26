@@ -45,6 +45,37 @@ public class TelaCaixa
         Console.ReadLine();
     }
 
+    public void VisualizarTodos()
+    {
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Visualização de Caixas");
+        Console.WriteLine("---------------------------");
+
+        Console.WriteLine(
+            "{0, -7} | {1, -15} | {2, -30} | {3, -17}",
+            "Id", "Etiqueta", "Cor", "Tempo de Empréstimo"
+        );
+
+        Caixa[] registros = repositorioCaixa.SelecionarTodos();
+
+        for (int i = 0; i < registros.Length; i++)
+        {
+            Caixa c = registros[i];
+
+            if (c == null)
+                continue;
+
+            Console.WriteLine(
+            "{0, -7} | {1, -15} | {2, -30} | {3, -17}",
+            c.Id, c.Etiqueta, c.Cor, c.TempodeEmpréstimo
+        );
+        }
+
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Pressione ENTER para prosseguir.");
+        Console.ReadLine();
+    }
+
     private Caixa ObterDadosCadastrais()
     {
         Console.WriteLine("Informe a etiqueta da caixa:");

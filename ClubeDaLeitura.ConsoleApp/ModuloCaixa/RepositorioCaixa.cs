@@ -15,4 +15,9 @@ public class RepositorioCaixa
             }
         }
     }
+
+    public Caixa[] SelecionarTodos()
+    {
+        return registros;
+    }
 }

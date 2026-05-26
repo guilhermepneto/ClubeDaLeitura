@@ -40,7 +40,7 @@ while (true)
 
         else if (opcaoMenuInterno == "4")
         {
-
+            telaCaixa.VisualizarTodos();
         }
     }
 
