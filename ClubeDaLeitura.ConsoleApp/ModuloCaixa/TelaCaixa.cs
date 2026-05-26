@@ -67,7 +67,7 @@ public class TelaCaixa
 
             Console.WriteLine(
             "{0, -7} | {1, -15} | {2, -30} | {3, -17}",
-            c.Id, c.Etiqueta, c.Cor, c.TempodeEmpréstimo
+            c.Id, c.Etiqueta, c.Cor, c.DiasDeEmprestimo
         );
         }
 
