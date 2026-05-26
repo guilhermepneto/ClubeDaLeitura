@@ -2,8 +2,16 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 
 public class TelaCaixa
 {
+
+    private RepositorioCaixa repositorioCaixa;
+
+    public TelaCaixa(RepositorioCaixa repositorioCaixa)
+    {
+        this.repositorioCaixa = repositorioCaixa;
+    }
     public string? ObterOpcaoMenu()
     {
+        Console.Clear();
         Console.WriteLine("---------------------------");
         Console.WriteLine("Gestão de Caixas");
         Console.WriteLine("---------------------------");
@@ -18,5 +26,39 @@ public class TelaCaixa
         string? opcaoMenuInterno = Console.ReadLine()?.ToUpper();
 
         return opcaoMenuInterno;
+    }
+
+    public void Cadastar()
+    {
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Cadastro de Caixas");
+        Console.WriteLine("---------------------------");
+
+        Caixa novaCaixa = ObterDadosCadastrais();
+
+        repositorioCaixa.Cadastrar(novaCaixa);
+
+        Console.WriteLine("---------------------------");
+        Console.WriteLine($"O registro \"{novaCaixa.Etiqueta}\" foi cadastrado com sucesso!");
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Pressione ENTER para prosseguir.");
+        Console.ReadLine();
+    }
+
+    private Caixa ObterDadosCadastrais()
+    {
+        Console.WriteLine("Informe a etiqueta da caixa:");
+        string? etiqueta = Console.ReadLine();
+
+        Console.WriteLine("Informe a cor da caixa:");
+        string? cor = Console.ReadLine();
+
+        Console.WriteLine("Informe o tempo de empréstimo da caixa:");
+        int diasDeEmprestimo = Convert.ToInt32(Console.ReadLine());
+
+        Caixa novaCaixa = new Caixa(etiqueta, cor, diasDeEmprestimo);
+
+        return novaCaixa;
+
     }
 }
