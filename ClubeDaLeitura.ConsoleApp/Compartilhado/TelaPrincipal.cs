@@ -4,6 +4,7 @@ public class TelaPrincipal
 {
     public string? ObterOpcaoMenuPrincipal()
     {
+        Console.Clear();
         Console.WriteLine("---------------------------");
         Console.WriteLine("Clube da Leitura");
         Console.WriteLine("---------------------------");

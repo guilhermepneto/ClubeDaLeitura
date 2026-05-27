@@ -14,49 +14,29 @@ while (true)
         break;
     }
 
-    if (opcaoMenuPrincipal == "1")
+    while (true)
     {
-        string? opcaoMenuInterno = telaCaixa.ObterOpcaoMenu();
-
-        if (opcaoMenuInterno == "S")
+        if (opcaoMenuPrincipal == "1")
         {
-            break;
+            string? opcaoMenuInterno = telaCaixa.ObterOpcaoMenu();
+
+            if (opcaoMenuInterno == "S")
+                break;
+
+            if (opcaoMenuInterno == "1")
+                telaCaixa.Cadastar();
+
+            else if (opcaoMenuInterno == "2")
+                telaCaixa.Editar();
+
+            else if (opcaoMenuInterno == "3")
+                telaCaixa.Excluir();
+
+            else if (opcaoMenuInterno == "4")
+                telaCaixa.VisualizarTodos(true);
+
         }
 
-        if (opcaoMenuInterno == "1")
-        {
-            telaCaixa.Cadastar();
-        }
-
-        else if (opcaoMenuInterno == "2")
-        {
-            telaCaixa.Editar();
-        }
-
-        else if (opcaoMenuInterno == "3")
-        {
-
-        }
-
-        else if (opcaoMenuInterno == "4")
-        {
-            telaCaixa.VisualizarTodos(true);
-        }
-    }
-
-    else if (opcaoMenuPrincipal == "2")
-    {
 
     }
-
-    else if (opcaoMenuPrincipal == "3")
-    {
-
-    }
-
-    else if (opcaoMenuPrincipal == "4")
-    {
-
-    }
-
 }

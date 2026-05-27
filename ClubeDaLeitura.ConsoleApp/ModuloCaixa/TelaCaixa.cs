@@ -69,6 +69,27 @@ public class TelaCaixa
 
     }
 
+    public void Excluir()
+    {
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Exclusão de Caixa");
+        Console.WriteLine("---------------------------");
+
+        VisualizarTodos(false);
+
+        Console.WriteLine("---------------------------");
+        Console.Write("Digite o ID do registro que deseja excluir: ");
+        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+        repositorioCaixa.Excluir(idSelecionado);
+
+        Console.WriteLine("---------------------------");
+        Console.WriteLine($"O registro \"{idSelecionado}\" foi excluído com sucesso!");
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Pressione ENTER para prosseguir.");
+        Console.ReadLine();
+    }
+
     public void VisualizarTodos(bool deveExibirCabecalho)
     {
         if (deveExibirCabecalho)
@@ -124,6 +145,4 @@ public class TelaCaixa
         return novaCaixa;
 
     }
-
-
 }
