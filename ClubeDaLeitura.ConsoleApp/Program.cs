@@ -1,8 +1,13 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
+using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 
 RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
+RepositorioRevista repositorioRevista = new RepositorioRevista();
+
 TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
+TelaRevista telaRevista = new TelaRevista(repositorioRevista, repositorioCaixa);
+
 TelaPrincipal telaPrincipal = new TelaPrincipal();
 
 while (true)

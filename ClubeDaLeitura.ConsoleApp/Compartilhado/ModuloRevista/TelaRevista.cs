@@ -37,10 +37,8 @@ public class TelaRevista
         Console.WriteLine("Cadastro de Revista");
         Console.WriteLine("---------------------------------");
 
-        // 1. Obter os dados cadastrais da revista
         Revista novaRevista = ObterDadosCadastrais();
 
-        // 2. Armazenar a revista no repositório
         repositorioRevista.Cadastrar(novaRevista);
 
         Console.WriteLine("---------------------------------");
@@ -56,7 +54,6 @@ public class TelaRevista
         Console.WriteLine("Edição de Revista");
         Console.WriteLine("---------------------------------");
 
-        // 1. Visualizar revistas cadastradas e obter o ID que deseja editar
         VisualizarTodos(false);
 
         Console.WriteLine("---------------------------------");
@@ -65,11 +62,8 @@ public class TelaRevista
         int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine("---------------------------------");
-
-        // 2. Obter os novos dados da revista
         Revista revistaAtualizada = ObterDadosCadastrais();
 
-        // 3. Editar a revista no repositório
         repositorioRevista.Editar(idSelecionado, revistaAtualizada);
 
         Console.WriteLine("---------------------------------");
@@ -85,7 +79,6 @@ public class TelaRevista
         Console.WriteLine("Exclusão de Revista");
         Console.WriteLine("---------------------------------");
 
-        // 1. Visualizar revistas cadastradas e obter o ID que deseja excluir
         VisualizarTodos(false);
 
         Console.WriteLine("---------------------------------");
@@ -93,7 +86,6 @@ public class TelaRevista
         Console.Write("Digite o ID do registro que deseja excluir: ");
         int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
-        // 2. Excluir a revista no repositório
         repositorioRevista.Excluir(idSelecionado);
 
         Console.WriteLine("---------------------------------");
