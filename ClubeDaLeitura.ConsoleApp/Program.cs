@@ -34,9 +34,26 @@ while (true)
 
             else if (opcaoMenuInterno == "4")
                 telaCaixa.VisualizarTodos(true);
-
         }
+        else if (opcaoMenuPrincipal == "2")
+        {
+            string? opcaoMenuInterno = telaRevista.ObterOpcaoMenu();
 
+            if (opcaoMenuInterno == "S")
+                break;
+
+            if (opcaoMenuInterno == "1")
+                telaRevista.Cadastrar();
+
+            else if (opcaoMenuInterno == "2")
+                telaRevista.Editar();
+
+            else if (opcaoMenuInterno == "3")
+                telaRevista.Excluir();
+
+            else if (opcaoMenuInterno == "4")
+                telaRevista.VisualizarTodos(true);
+        }
 
     }
 }
