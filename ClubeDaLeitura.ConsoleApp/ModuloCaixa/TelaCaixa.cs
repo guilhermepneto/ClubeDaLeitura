@@ -1,13 +1,16 @@
+using ClubeDaLeitura.ConsoleApp.ModuloRevista;
+
 namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 
 public class TelaCaixa
 {
+    private readonly RepositorioCaixa repositorioCaixa;
+    private readonly RepositorioRevista repositorioRevista;
 
-    private RepositorioCaixa repositorioCaixa;
-
-    public TelaCaixa(RepositorioCaixa repositorioCaixa)
+    public TelaCaixa(RepositorioCaixa repositorioCaixa, RepositorioRevista repositorioRevista)
     {
         this.repositorioCaixa = repositorioCaixa;
+        this.repositorioRevista = repositorioRevista;
     }
     public string? ObterOpcaoMenu()
     {
@@ -30,63 +33,129 @@ public class TelaCaixa
 
     public void Cadastar()
     {
-        Console.WriteLine("---------------------------");
-        Console.WriteLine("Cadastro de Caixas");
-        Console.WriteLine("---------------------------");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Cadastro de Caixa");
+        Console.WriteLine("---------------------------------");
 
         Caixa novaCaixa = ObterDadosCadastrais();
 
+        EntidadeBase[] caixas = repositorioCaixa.SelecionarTodos();
+
+        for (int i = 0; i < caixas.Length; i++)
+        {
+            Caixa c = (Caixa)caixas[i];
+
+            if (c == null)
+                continue;
+
+            if (c.Etiqueta.ToLower() == novaCaixa.Etiqueta.ToLower())
+            {
+                Console.WriteLine("---------------------------------");
+                Console.WriteLine($"Já existe uma caixa com a etiqueta \"{novaCaixa.Etiqueta}\"!");
+                Console.WriteLine("---------------------------------");
+                Console.WriteLine("Digite ENTER para continuar");
+                Console.ReadLine();
+
+                return;
+            }
+        }
+
         repositorioCaixa.Cadastrar(novaCaixa);
 
-        Console.WriteLine("---------------------------");
+        Console.WriteLine("---------------------------------");
         Console.WriteLine($"O registro \"{novaCaixa.Etiqueta}\" foi cadastrado com sucesso!");
-        Console.WriteLine("---------------------------");
-        Console.WriteLine("Pressione ENTER para prosseguir.");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Digite ENTER para continuar");
         Console.ReadLine();
     }
 
     public void Editar()
     {
-        Console.WriteLine("---------------------------");
+        Console.WriteLine("---------------------------------");
         Console.WriteLine("Edição de Caixa");
-        Console.WriteLine("---------------------------");
+        Console.WriteLine("---------------------------------");
 
         VisualizarTodos(false);
 
-        Console.WriteLine("---------------------------");
+        Console.WriteLine("---------------------------------");
+
         Console.Write("Digite o ID do registro que deseja editar: ");
         int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
+        Console.WriteLine("---------------------------------");
+
         Caixa caixaAtualizada = ObterDadosCadastrais();
+
+        EntidadeBase[] caixas = repositorioCaixa.SelecionarTodos();
+
+        for (int i = 0; i < caixas.Length; i++)
+        {
+            Caixa c = (Caixa)caixas[i];
+
+            if (c == null)
+                continue;
+
+            if (c.Id != idSelecionado && c.Etiqueta.ToLower() == caixaAtualizada.Etiqueta.ToLower())
+            {
+                Console.WriteLine("---------------------------------");
+                Console.WriteLine($"Já existe uma caixa com a etiqueta \"{caixaAtualizada.Etiqueta}\"!");
+                Console.WriteLine("---------------------------------");
+                Console.WriteLine("Digite ENTER para continuar");
+                Console.ReadLine();
+
+                return;
+            }
+        }
 
         repositorioCaixa.Editar(idSelecionado, caixaAtualizada);
 
-        Console.WriteLine("---------------------------");
+        Console.WriteLine("---------------------------------");
         Console.WriteLine($"O registro \"{caixaAtualizada.Etiqueta}\" foi editado com sucesso!");
-        Console.WriteLine("---------------------------");
-        Console.WriteLine("Pressione ENTER para prosseguir.");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Digite ENTER para continuar");
         Console.ReadLine();
-
     }
 
     public void Excluir()
     {
-        Console.WriteLine("---------------------------");
+        Console.WriteLine("---------------------------------");
         Console.WriteLine("Exclusão de Caixa");
-        Console.WriteLine("---------------------------");
+        Console.WriteLine("---------------------------------");
 
         VisualizarTodos(false);
 
-        Console.WriteLine("---------------------------");
+        Console.WriteLine("---------------------------------");
+
         Console.Write("Digite o ID do registro que deseja excluir: ");
         int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
+        Revista[] revistas = repositorioRevista.SelecionarTodos();
+
+        for (int i = 0; i < revistas.Length; i++)
+        {
+            Revista r = revistas[i];
+
+            if (r == null)
+                continue;
+
+            if (r.Caixa.Id == idSelecionado)
+            {
+                Console.WriteLine("---------------------------------");
+                Console.WriteLine("Não é possível excluir uma caixa com revistas vinculadas!");
+                Console.WriteLine("---------------------------------");
+                Console.WriteLine("Digite ENTER para continuar");
+                Console.ReadLine();
+
+                return;
+            }
+        }
+
         repositorioCaixa.Excluir(idSelecionado);
 
-        Console.WriteLine("---------------------------");
-        Console.WriteLine($"O registro \"{idSelecionado}\" foi excluído com sucesso!");
-        Console.WriteLine("---------------------------");
-        Console.WriteLine("Pressione ENTER para prosseguir.");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"O registro de ID \"{idSelecionado}\" foi excluído com sucesso!");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Digite ENTER para continuar");
         Console.ReadLine();
     }
 
@@ -104,11 +173,11 @@ public class TelaCaixa
             "Id", "Etiqueta", "Cor", "Tempo de Empréstimo"
         );
 
-        Caixa[] registros = repositorioCaixa.SelecionarTodos();
+        EntidadeBase[] registros = repositorioCaixa.SelecionarTodos();
 
         for (int i = 0; i < registros.Length; i++)
         {
-            Caixa c = registros[i];
+            Caixa c = (Caixa)registros[i];
 
             if (c == null)
                 continue;

@@ -150,11 +150,11 @@ public class TelaRevista
             "Id", "Etiqueta", "Cor", "Tempo de Empréstimo"
         );
 
-        Caixa[] registros = repositorioCaixa.SelecionarTodos();
+        object[] registros = repositorioCaixa.SelecionarTodos();
 
         for (int i = 0; i < registros.Length; i++)
         {
-            Caixa c = registros[i];
+            Caixa c = (Caixa)registros[i];
 
             if (c == null)
                 continue;
@@ -170,7 +170,7 @@ public class TelaRevista
         Console.Write("Digite o ID do registro que deseja selecionar: ");
         int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
-        Caixa? caixaSelecionada = repositorioCaixa.SelecionarPorId(idSelecionado);
+        Caixa? caixaSelecionada = (Caixa?)repositorioCaixa.SelecionarPorId(idSelecionado);
 
         return new Revista(titulo, numeroEdicao, anoPublicacao, caixaSelecionada);
     }
