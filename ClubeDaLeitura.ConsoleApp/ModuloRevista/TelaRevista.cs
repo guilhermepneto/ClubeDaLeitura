@@ -11,28 +11,11 @@ public class TelaRevista : TelaBase
     public TelaRevista(
         string nomeEntidade,
         RepositorioRevista repositorioRevista,
-        RepositorioCaixa repositorioCaixa) : base(nomeEntidade)
+        RepositorioCaixa repositorioCaixa) : base(nomeEntidade, repositorioRevista)
     {
         this.repositorioRevista = repositorioRevista;
         this.repositorioCaixa = repositorioCaixa;
     }
-    public void Cadastrar()
-    {
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("Cadastro de Revista");
-        Console.WriteLine("---------------------------------");
-
-        Revista novaRevista = ObterDadosCadastrais();
-
-        repositorioRevista.Cadastrar(novaRevista);
-
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine($"O registro \"{novaRevista.Titulo}\" foi cadastrado com sucesso!");
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("Digite ENTER para continuar");
-        Console.ReadLine();
-    }
-
     public void Editar()
     {
         Console.WriteLine("---------------------------------");
@@ -47,7 +30,7 @@ public class TelaRevista : TelaBase
         int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine("---------------------------------");
-        Revista revistaAtualizada = ObterDadosCadastrais();
+        Revista revistaAtualizada = (Revista)ObterDadosCadastrais();
 
         repositorioRevista.Editar(idSelecionado, revistaAtualizada);
 
@@ -117,7 +100,7 @@ public class TelaRevista : TelaBase
         }
     }
 
-    private Revista ObterDadosCadastrais()
+    protected override EntidadeBase ObterDadosCadastrais()
     {
         Console.Write("Informe o título da revista: ");
         string? titulo = Console.ReadLine();

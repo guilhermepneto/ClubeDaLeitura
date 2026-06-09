@@ -11,49 +11,11 @@ public class TelaCaixa : TelaBase
     public TelaCaixa(
         string nomeEntidade,
         RepositorioCaixa repositorioCaixa,
-        RepositorioRevista repositorioRevista) : base(nomeEntidade)
+        RepositorioRevista repositorioRevista) : base(nomeEntidade, repositorioCaixa)
     {
         this.repositorioCaixa = repositorioCaixa;
         this.repositorioRevista = repositorioRevista;
     }
-    public void Cadastar()
-    {
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("Cadastro de Caixa");
-        Console.WriteLine("---------------------------------");
-
-        Caixa novaCaixa = ObterDadosCadastrais();
-
-        EntidadeBase[] caixas = repositorioCaixa.SelecionarTodos();
-
-        for (int i = 0; i < caixas.Length; i++)
-        {
-            Caixa c = (Caixa)caixas[i];
-
-            if (c == null)
-                continue;
-
-            if (c.Etiqueta.ToLower() == novaCaixa.Etiqueta.ToLower())
-            {
-                Console.WriteLine("---------------------------------");
-                Console.WriteLine($"Já existe uma caixa com a etiqueta \"{novaCaixa.Etiqueta}\"!");
-                Console.WriteLine("---------------------------------");
-                Console.WriteLine("Digite ENTER para continuar");
-                Console.ReadLine();
-
-                return;
-            }
-        }
-
-        repositorioCaixa.Cadastrar(novaCaixa);
-
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine($"O registro \"{novaCaixa.Etiqueta}\" foi cadastrado com sucesso!");
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("Digite ENTER para continuar");
-        Console.ReadLine();
-    }
-
     public void Editar()
     {
         Console.WriteLine("---------------------------------");
@@ -69,7 +31,7 @@ public class TelaCaixa : TelaBase
 
         Console.WriteLine("---------------------------------");
 
-        Caixa caixaAtualizada = ObterDadosCadastrais();
+        Caixa caixaAtualizada = (Caixa)ObterDadosCadastrais();
 
         EntidadeBase[] caixas = repositorioCaixa.SelecionarTodos();
 
@@ -183,7 +145,7 @@ public class TelaCaixa : TelaBase
 
     }
 
-    private Caixa ObterDadosCadastrais()
+    protected override EntidadeBase ObterDadosCadastrais()
     {
         Console.WriteLine("Informe a etiqueta da caixa:");
         string? etiqueta = Console.ReadLine();
