@@ -35,7 +35,7 @@ while (true)
                 break;
 
             if (opcaoMenuInterno == "1")
-                telaCaixa.Cadastar();
+                telaCaixa.Cadastrar();
 
             else if (opcaoMenuInterno == "2")
                 telaCaixa.Editar();

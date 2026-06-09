@@ -17,49 +17,6 @@ public class TelaCaixa : TelaBase
         this.repositorioRevista = repositorioRevista;
     }
 
-    public void Excluir()
-    {
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("Exclusão de Caixa");
-        Console.WriteLine("---------------------------------");
-
-        VisualizarTodos(false);
-
-        Console.WriteLine("---------------------------------");
-
-        Console.Write("Digite o ID do registro que deseja excluir: ");
-        int idSelecionado = Convert.ToInt32(Console.ReadLine());
-
-        EntidadeBase[] revistas = repositorioRevista.SelecionarTodos();
-
-        for (int i = 0; i < revistas.Length; i++)
-        {
-            Revista r = (Revista)revistas[i];
-
-            if (r == null)
-                continue;
-
-            if (r.Caixa.Id == idSelecionado)
-            {
-                Console.WriteLine("---------------------------------");
-                Console.WriteLine("Não é possível excluir uma caixa com revistas vinculadas!");
-                Console.WriteLine("---------------------------------");
-                Console.WriteLine("Digite ENTER para continuar");
-                Console.ReadLine();
-
-                return;
-            }
-        }
-
-        repositorioCaixa.Excluir(idSelecionado);
-
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine($"O registro de ID \"{idSelecionado}\" foi excluído com sucesso!");
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("Digite ENTER para continuar");
-        Console.ReadLine();
-    }
-
     public override void VisualizarTodos(bool deveExibirCabecalho)
     {
         if (deveExibirCabecalho)

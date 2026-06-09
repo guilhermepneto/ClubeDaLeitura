@@ -30,7 +30,7 @@ public abstract class TelaBase
         return opcaoMenuInterno;
     }
 
-    public void Cadastar()
+    public void Cadastrar()
     {
         Console.WriteLine("---------------------------------");
         Console.WriteLine($"Cadastro de {nomeEntidade}");
@@ -46,7 +46,6 @@ public abstract class TelaBase
         Console.WriteLine("Digite ENTER para continuar");
         Console.ReadLine();
     }
-
     public void Editar()
     {
         Console.WriteLine("---------------------------------");
@@ -72,6 +71,29 @@ public abstract class TelaBase
         Console.WriteLine("Digite ENTER para continuar");
         Console.ReadLine();
     }
+
+    public void Excluir()
+    {
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"Exclusão de {nomeEntidade}");
+        Console.WriteLine("---------------------------------");
+
+        VisualizarTodos(false);
+
+        Console.WriteLine("---------------------------------");
+
+        Console.Write("Digite o ID do registro que deseja excluir: ");
+        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+        repositorio.Excluir(idSelecionado);
+
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"O registro \"{idSelecionado}\" foi excluído com sucesso!");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Pressione ENTER para continuar");
+        Console.ReadLine();
+    }
+
 
     public abstract void VisualizarTodos(bool deveExibirCabecalho);
     protected abstract EntidadeBase ObterDadosCadastrais();
