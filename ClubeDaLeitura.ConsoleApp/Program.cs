@@ -11,8 +11,8 @@ Revista revistaTeste = new Revista("Action Comics", 1, 1976, caixaTeste);
 repositorioCaixa.Cadastrar(caixaTeste);
 repositorioRevista.Cadastrar(revistaTeste);
 
-TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa, repositorioRevista);
-TelaRevista telaRevista = new TelaRevista(repositorioRevista, repositorioCaixa);
+TelaCaixa telaCaixa = new TelaCaixa("Caixa", repositorioCaixa, repositorioRevista);
+TelaRevista telaRevista = new TelaRevista("Revista", repositorioRevista, repositorioCaixa);
 
 TelaPrincipal telaPrincipal = new TelaPrincipal();
 
