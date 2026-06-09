@@ -16,31 +16,6 @@ public class TelaRevista : TelaBase
         this.repositorioRevista = repositorioRevista;
         this.repositorioCaixa = repositorioCaixa;
     }
-    public void Editar()
-    {
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("Edição de Revista");
-        Console.WriteLine("---------------------------------");
-
-        VisualizarTodos(false);
-
-        Console.WriteLine("---------------------------------");
-
-        Console.Write("Digite o ID do registro que deseja editar: ");
-        int idSelecionado = Convert.ToInt32(Console.ReadLine());
-
-        Console.WriteLine("---------------------------------");
-        Revista revistaAtualizada = (Revista)ObterDadosCadastrais();
-
-        repositorioRevista.Editar(idSelecionado, revistaAtualizada);
-
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine($"O registro \"{revistaAtualizada.Titulo}\" foi editado com sucesso!");
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("Digite ENTER para continuar");
-        Console.ReadLine();
-    }
-
     public void Excluir()
     {
         Console.WriteLine("---------------------------------");
@@ -63,7 +38,7 @@ public class TelaRevista : TelaBase
         Console.ReadLine();
     }
 
-    public void VisualizarTodos(bool deveExibirCabecalho)
+    public override void VisualizarTodos(bool deveExibirCabecalho)
     {
         if (deveExibirCabecalho)
         {

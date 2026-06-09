@@ -47,6 +47,33 @@ public abstract class TelaBase
         Console.ReadLine();
     }
 
+    public void Editar()
+    {
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"Edição de {nomeEntidade}");
+        Console.WriteLine("---------------------------------");
+
+        VisualizarTodos(false);
+
+        Console.WriteLine("---------------------------------");
+
+        Console.Write("Digite o ID do registro que deseja editar: ");
+        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("---------------------------------");
+
+        EntidadeBase entidadeAtualizada = ObterDadosCadastrais();
+
+        repositorio.Editar(idSelecionado, entidadeAtualizada);
+
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"O registro \"{entidadeAtualizada.Id}\" foi editado com sucesso!");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Digite ENTER para continuar");
+        Console.ReadLine();
+    }
+
+    public abstract void VisualizarTodos(bool deveExibirCabecalho);
     protected abstract EntidadeBase ObterDadosCadastrais();
 
 }
