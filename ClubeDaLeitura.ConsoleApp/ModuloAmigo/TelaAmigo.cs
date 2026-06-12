@@ -29,6 +29,19 @@ public class TelaAmigo : TelaBase
 
         EntidadeBase[] amigos = repositorioAmigo.SelecionarTodos();
 
+        for (int i = 0; i < amigos.Length; i++)
+        {
+            Amigo a = (Amigo)amigos[i];
+
+            if (a == null)
+                continue;
+
+            Console.WriteLine(
+                "{0, -7} | {1, -15} | {2, -15} | {3, -13}",
+                a.Id, a.Nome, a.NomeResponsavel, a.Telefone
+            );
+        }
+
 
         if (deveExibirCabecalho)
         {

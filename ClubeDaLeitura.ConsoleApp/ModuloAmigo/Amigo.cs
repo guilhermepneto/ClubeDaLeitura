@@ -12,6 +12,7 @@ public class Amigo : EntidadeBase
     public Amigo(string nome, string nomeResponsavel, string telefone)
     {
         Id = GeradorIds.ObterIdAmigo();
+
         Nome = nome;
         NomeResponsavel = nomeResponsavel;
         Telefone = telefone;
@@ -21,8 +22,8 @@ public class Amigo : EntidadeBase
     {
         Amigo amigoAtualizado = (Amigo)entidadeAtualizada;
 
-        Nome = amigoAtualizado.nome;
-        NomeResponsavel = amigoAtualizado.nomeResponsavel;
-        Telefone = amigoAtualizado.telefone;
+        Nome = amigoAtualizado.Nome;
+        NomeResponsavel = amigoAtualizado.NomeResponsavel;
+        Telefone = amigoAtualizado.Telefone;
     }
 }
