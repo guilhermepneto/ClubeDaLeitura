@@ -11,7 +11,7 @@ public abstract class TelaBase
         this.repositorio = repositorio;
     }
 
-    public string? ObterOpcaoMenu()
+    public virtual string? ObterOpcaoMenu()
     {
         Console.Clear();
         Console.WriteLine("---------------------------");
@@ -71,7 +71,6 @@ public abstract class TelaBase
         Console.WriteLine("Digite ENTER para continuar");
         Console.ReadLine();
     }
-
     public void Excluir()
     {
         Console.WriteLine("---------------------------------");

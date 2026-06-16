@@ -81,7 +81,6 @@ public class TelaEmprestimo
             Console.ReadLine();
             return;
         }
-
         if (!revistaSelecionada.EstaDisponivel)
         {
             if (revistaSelecionada == null)
@@ -92,6 +91,30 @@ public class TelaEmprestimo
                 Console.WriteLine("Presione ENTER para continuar");
                 Console.ReadLine();
                 return;
+            }
+        }
+
+        EntidadeBase[] emprestimos = repositorioEmprestimo.SelecionarTodos();
+
+        Console.WriteLine(
+            "{0, -7} | {1, -15} | {2, -15} | {3, -17} | {4, -15}",
+            "Id", "Revista", "Abertura", "Conclusão Prev.", "Status"
+     );
+
+        for (int i = 0; i < emprestimos.Length; i++)
+        {
+            Emprestimo e = (Emprestimo)emprestimos[i];
+
+            if (e == null)
+                continue;
+
+            if (e.Amigo.Id == amigoSelecionado.Id && e.EstaAberto)
+            {
+                Console.WriteLine("---------------------------------");
+                Console.WriteLine($"O amigo \"{amigoSelecionado.Nome}\" possui empréstimo em aberto!");
+                Console.WriteLine("---------------------------------");
+                Console.WriteLine("Presione ENTER para continuar");
+                Console.ReadLine();
             }
         }
 
@@ -126,7 +149,7 @@ public class TelaEmprestimo
         if (emprestimo == null)
         {
             Console.WriteLine("---------------------------------");
-            Console.WriteLine($"O empréstimo \"{emprestimo.Id}\" não foi encontrado!");
+            Console.WriteLine($"O empréstimo \"{idEmprestimo}\" não foi encontrado!");
             Console.WriteLine("---------------------------------");
             Console.WriteLine("Presione ENTER para continuar");
             Console.ReadLine();
@@ -212,9 +235,9 @@ public class TelaEmprestimo
 
             Console.WriteLine(
                 "{0, -7} | {1, -25} | {2, -6} | {3, -4} | {4, -15}",
-                r.Id, r.Titulo, r.NumeroEdicao, r.AnoPublicacao, r.Caixa.Etiqueta, r.Status.ToString();
+                r.Id, r.Titulo, r.NumeroEdicao, r.AnoPublicacao, r.Caixa.Etiqueta, r.Status.ToString()
             );
-    }
+        }
     }
     private void VisualizarAmigos()
     {
