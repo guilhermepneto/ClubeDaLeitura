@@ -3,7 +3,7 @@ using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloRevista;
 
-public class TelaRevista : TelaBase
+public class TelaRevista : TelaBase, ITelaOpcoes
 {
     private readonly RepositorioRevista repositorioRevista;
     private readonly RepositorioCaixa repositorioCaixa;

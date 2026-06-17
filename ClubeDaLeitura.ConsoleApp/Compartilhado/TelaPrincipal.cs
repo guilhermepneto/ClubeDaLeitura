@@ -1,8 +1,36 @@
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
+using ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
+using ClubeDaLeitura.ConsoleApp.ModuloRevista;
+
 namespace ClubeDaLeitura.ConsoleApp.Compartilhado;
 
 public class TelaPrincipal
 {
-    public string? ObterOpcaoMenuPrincipal()
+    private readonly RepositorioCaixa repositorioCaixa;
+    private readonly RepositorioAmigo repositorioAmigo;
+    private readonly RepositorioRevista repositorioRevista;
+    private readonly RepositorioEmprestimo repositorioEmprestimo;
+
+    public TelaPrincipal()
+    {
+        repositorioCaixa = new RepositorioCaixa();
+        repositorioRevista = new RepositorioRevista();
+        repositorioAmigo = new RepositorioAmigo();
+        repositorioEmprestimo = new RepositorioEmprestimo();
+
+        Caixa caixaTeste = new Caixa("Ação", "Vermelho", 5);
+        Revista revistaTeste = new Revista("Action Comics", 1, 1976, caixaTeste);
+        Amigo amigoTeste = new Amigo("Fulano", "Ciclano", "49991718544");
+        Emprestimo emprestimoTeste = new Emprestimo(amigoTeste, revistaTeste);
+        emprestimoTeste.Abrir();
+
+        repositorioCaixa.Cadastrar(caixaTeste);
+        repositorioRevista.Cadastrar(revistaTeste);
+        repositorioAmigo.Cadastrar(amigoTeste);
+        repositorioEmprestimo.Cadastrar(emprestimoTeste);
+    }
+    public ITelaOpcoes? ObterOpcaoMenuPrincipal()
     {
         Console.Clear();
         Console.WriteLine("---------------------------");
@@ -18,6 +46,18 @@ public class TelaPrincipal
 
         string? opcaoMenuPrincipal = Console.ReadLine()?.ToUpper();
 
-        return opcaoMenuPrincipal;
+        if (opcaoMenuPrincipal == "1")
+            return new TelaCaixa("Caixa", repositorioCaixa, repositorioRevista);
+
+        if (opcaoMenuPrincipal == "2")
+            return new TelaRevista("Revista", repositorioRevista, repositorioCaixa);
+
+        if (opcaoMenuPrincipal == "3")
+            return new TelaAmigo("Amigo", repositorioAmigo, repositorioEmprestimo);
+
+        if (opcaoMenuPrincipal == "4")
+            return new TelaEmprestimo(repositorioEmprestimo, repositorioRevista, repositorioAmigo);
+
+        return null;
     }
 }
